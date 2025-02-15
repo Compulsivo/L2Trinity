@@ -1,0 +1,26 @@
+<list>
+	<set name="refreshAllStatisticsIn" val="400" />
+	<category name="General">
+		<type name="Acquired XP" type="xp" refreshTime="weekly"/>
+		<type name="Acquired Adena" type="adena" refreshTime="monthly"/>
+		<type name="Play Duration" type="play_duration" refreshTime="daily" timer="true"/>
+		<type name="Private Store Sales" type="private_stores_sales" refreshTime="weekly" additionalText="Round(s)"/>
+		<type name="Quests Clear" type="quests_clear" refreshTime="weekly" additionalText="Round(s)"/>
+	</category>
+	<category name="Hunting Grounds">
+		<type name="Number of Monster Killings" type="monster_kills" refreshTime="total" additionalText="Round(s)" />
+		<type name="Monster Kill XP" type="monster_kill_xp" refreshTime="daily" />
+		<type name="Number of Deaths by Monsters" type="monster_deaths" refreshTime="total" additionalText="Round(s)" />
+	</category>
+	<category name="Raid">
+		<type name="Baium" type="raid_kill_22222" refreshTime="total" additionalText="Round(s)" />
+		<type name="Antharas" type="raid_kill_22222" refreshTime="total" additionalText="Round(s)" />
+		<type name="Valakas" type="raid_kill_22222" refreshTime="total" additionalText="Round(s)" />
+	</category>
+	<category name="PVP">
+		<type name="PK Victory Count" type="pk_victories" refreshTime="total" additionalText="People" />
+		<type name="PvP Victory Count" type="pvp_victories" refreshTime="total" additionalText="People" />
+		<type name="PK Defeat Count" type="pk_defeats" refreshTime="total" additionalText="Round(s)" />
+		<type name="PvP Defeat Count" type="pvp_defeats" refreshTime="total" additionalText="Round(s)" />
+	</category>
+</list>

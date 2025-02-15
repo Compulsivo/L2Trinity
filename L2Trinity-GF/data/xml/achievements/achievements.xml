@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<!-- EXAMPLE: <achievement id="45" cat="5" type="_treasure_box_opened" desc="Open %need% chests."> <level id="1" name="Treasure searcher" icon="icon.skill0419" need="10" fame="0"/> <level id="2" name="Treasure searcher" icon="icon.skill0419" need="100" fame="0"/> <level id="2" name="Treasure searcher" icon="icon.skill0419" need="500" fame="0"/> <level id="2" name="Treasure searcher" icon="icon.skill0419" need="1000" fame="0"> <reward id="14687" count="3" name="Greater Elixir of Life (S-Grade)"/> <reward id="14699" count="5" name="Greater Elixir of CP (S-Grade"/> </lvl> </achievement> -->
+
+	<categories>
+		<cat id="1" name="Farming" desc="Monsters, Epics, Raids." icon="icon.skill5860" />
+		<cat id="2" name="PvP" desc="Everything related to PvP - kills, deaths, etc." icon="icon.skill958" />
+		<cat id="3" name="Events" desc="Everything related to Events" icon="icon.weapon_fort_flag_i00" />
+		<cat id="4" name="Enchant" desc="Everything Related to Enchanting." icon="icon.etc_blessed_scrl_of_ench_wp_s_i05" />
+		<cat id="5" name="Instances" desc="Everything Related to Instances." icon="l2prideicons.12cec" />
+		<cat id="6" name="Others" desc="Skills, crafting, materials, etc." icon="icon.skill0818" />
+	</categories>
+
+	<!-- Enemy achievements -->
+	<achievement id="1" cat="1" type="mobsKilled" desc="Defeat %need% monsters.">
+		<level id="1" name="Farmer" icon="icon.skill1539" need="1000" fame="10" >
+		<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Farmer" icon="icon.skill1539" need="2000" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Farmer" icon="icon.skill1539" need="3000" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Farmer" icon="icon.skill1539" need="4000" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Farmer" icon="icon.skill1539" need="5000" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="2" cat="1" type="raidsKilled" desc="Defeat %need% raid bossess.">
+		<level id="1" name="Raid Slayer" icon="icon.skill4289" need="10" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Raid Slayer" icon="icon.skill4289" need="50" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Raid Slayer" icon="icon.skill4289" need="100" fame="30">
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Raid Slayer" icon="icon.skill4289" need="250" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Raid Slayer" icon="icon.skill4289" need="300" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="3" cat="1" type="championsKilled" desc="Defeat %need% champion monsters.">
+		<level id="1" name="Champion" icon="icon.skill1129" need="10" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Champion" icon="icon.skill1129" need="20" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Champion" icon="icon.skill1129" need="30" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Champion" icon="icon.skill1129" need="50" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Champion" icon="icon.skill1129" need="80" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="4" cat="1" type="horrorKilled" desc="Defeat %need% Horror Knights.">
+		<level id="1" name="Horror Slayer" icon="icon.skill11833" need="100" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Horror Slayer" icon="icon.skill11833" need="200" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Horror Slayer" icon="icon.skill11833" need="303" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Horror Slayer" icon="icon.skill11833" need="400" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Horror Slayer" icon="icon.skill11833" need="500" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="5" cat="1" type="holyKnightKilled" desc="Defeat %need% Holy Knights.">
+		<level id="1" name="Holy S#*T" icon="icon.skill6320" need="100" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Holy S#*T" icon="icon.skill6320" need="200" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Holy S#*T" icon="icon.skill6320" need="300" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Holy S#*T" icon="icon.skill6320" need="400" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Holy S#*T" icon="icon.skill6320" need="500" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="6" cat="1" type="majinHorrorKilled" desc="Defeat %need% Majin Horrors.">
+		<level id="1" name="Majin Farmer" icon="icon.skill11834" need="50" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Majin Farmer" icon="icon.skill11834" need="100" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Majin Farmer" icon="icon.skill11834" need="150" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Majin Farmer" icon="icon.skill11834" need="200" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Majin Farmer" icon="icon.skill11834" need="250" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="7" cat="1" type="majinOblivionKilled" desc="Defeat %need% Majin Oblivions.">
+		<level id="1" name="Majin Farmer" icon="icon.skill11389" need="50" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Majin Farmer" icon="icon.skill11389" need="100" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Majin Farmer" icon="icon.skill11389" need="150" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Majin Farmer" icon="icon.skill11389" need="200" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Majin Farmer" icon="icon.skill11389" need="250" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="8" cat="1" type="pusKilled" desc="Defeat %need% Pus Boomers.">
+		<level id="1" name="1 Bow - 1 Dream" icon="icon.skill1585" need="100" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="1 Bow - 1 Dream" icon="icon.skill1585" need="200" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="1 Bow - 1 Dream" icon="icon.skill1585" need="300" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="1 Bow - 1 Dream" icon="icon.skill1585" need="400" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="1 Bow - 1 Dream" icon="icon.skill1585" need="500" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="9" cat="1" type="titaniumDreadKilled" desc="Defeat %need% Titanium Dreads.">
+		<level id="1" name="Legacy Hopes" icon="icon.skill10277" need="10" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Legacy Hopes" icon="icon.skill10277" need="30" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Legacy Hopes" icon="icon.skill10277" need="50" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Legacy Hopes" icon="icon.skill10277" need="80" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Legacy Hopes" icon="icon.skill10277" need="120" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="10" cat="1" type="glabKilled" desc="Defeat %need% Glabrezus.">
+		<level id="1" name="Glab Slayer" icon="icon.skill1608" need="100" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Glab Slayer" icon="icon.skill1608" need="200" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Glab Slayer" icon="icon.skill1608" need="300" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Glab Slayer" icon="icon.skill1608" need="400" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Glab Slayer" icon="icon.skill1608" need="500" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+
+	<!-- Combo achievements -->
+	<achievement id="20" cat="2" type="pvpKills" desc="Kill %need% players.">
+		<level id="1" name="Taste Their Blood" icon="icon.skill1463" need="500" fame="10" >
+			<reward id="800003" count="1" name="Small Fortune Chest" />
+		</level>
+		<level id="2" name="Serial Killer" icon="icon.skill1463" need="1000" fame="20" >
+			<reward id="800003" count="1" name="Small Fortune Chest" />
+		</level>
+		<level id="3" name="Mass Killer" icon="icon.skill1463" need="3500" fame="30" >
+			<reward id="800003" count="1" name="Small Fortune Chest" />
+		</level>
+		<level id="4" name="I see dead people" icon="icon.skill1463" need="5500" fame="40" >
+			<reward id="800003" count="1" name="Small Fortune Chest" />
+		</level>
+		<level id="5" name="Your kill count is over 9000" icon="icon.skill1463" need="9000" fame="50" >
+			<reward id="800004" count="1" name="Medium Fortune Chest" />
+		</level>
+	</achievement>
+	
+	
+	
+	<!--		<level id="1" name="Newbie Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="10" fame="50" >
+						<reward id="6577" count="1" name="Blessed Enchant Weapon S"/>
+		</level>
+		<level id="2" name="Apprentice Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="11" fame="50" >
+						<reward id="6577" count="1" name="Blessed Enchant Weapon S"/>
+		</level>
+		<level id="3" name="Experienced Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="12" fame="50" >
+						<reward id="6577" count="1" name="Blessed Enchant Weapon S"/>
+		</level>
+		<level id="4" name="Skilled Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="13" fame="50" >
+						<reward id="6577" count="1" name="Blessed Enchant Weapon S"/>
+		</level>
+		<level id="5" name="Guru Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="14" fame="50" >
+						<reward id="800004" count="1" name="Medium Fortune Chest "/>
+		</level>-->
+	<achievement id="21" cat="2" type="olyHiScore" desc="Reach %need% olympiad points.">
+		<level id="1" name="Arena Newbie" icon="icon.skill0395" need="40" fame="10"  >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Arena Apprentice" icon="icon.skill0395" need="50" fame="20"  >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Arena Experienced" icon="icon.skill0395" need="80" fame="30"  >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Arena Veteran" icon="icon.skill0395" need="100" fame="40"  >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Arena Master" icon="icon.skill0395" need="150" fame="50"  >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="22" cat="2" type="olyGamesWon" desc="Win %need% olympiad games.">
+		<level id="1" name="Gladiator" icon="icon.skill10252" need="10" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Gladiator" icon="icon.skill10252" need="40" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Gladiator" icon="icon.skill10252" need="80" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Gladiator" icon="icon.skill10252" need="120" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Gladiator" icon="icon.skill10252" need="200" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<!--<achievement id="23" cat="2" type="tvtPlayed" desc="Play %need% TvT Events.">
+		<level id="1" name="TvT Guru" icon="icon.skill0522" need="5" fame="0" >
+				<reward id="98020" count="10" name="Fame"/>
+		</level>
+		<level id="2" name="TvT Guru" icon="icon.skill0522" need="10" fame="0" >
+				<reward id="98020" count="20" name="Fame"/>
+		</level>
+		<level id="3" name="TvT Guru" icon="icon.skill0522" need="15" fame="0" >
+				<reward id="98020" count="30" name="Fame"/>
+		</level>
+		<level id="4" name="TvT Guru" icon="icon.skill0522" need="20" fame="0" >
+				<reward id="98020" count="40" name="Fame"/>
+		</level>
+		<level id="5" name="TvT Guru" icon="icon.skill0522" need="40" fame="0" >
+				<reward id="98020" count="50" name="Fame"/>
+		</level>
+	</achievement>-->
+	<!--<achievement id="24" cat="2" type="pkInARowKills" desc="Make %need% PK kills without losing your karma.">
+		<level id="1" name="Berserk" icon="icon.skill0522" need="5" fame="5" />
+		<level id="2" name="Berserk" icon="icon.skill0522" need="10" fame="10" />
+		<level id="3" name="Berserk" icon="icon.skill0522" need="25" fame="25" />
+		<level id="4" name="Berserk" icon="icon.skill0522" need="50" fame="50" />
+		<level id="5" name="Berserk" icon="icon.skill0522" need="100" fame="100" />
+	</achievement>-->
+	<achievement id="25" cat="2" type="timesHero" desc="Become a hero %need% time(s).">
+		<level id="1" name="Baby Hero" icon="icon.skill0396" need="1" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Junior Hero" icon="icon.skill0396" need="2" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Hero" icon="icon.skill0396" need="3" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="The Hero" icon="icon.skill0396" need="4" fame="40" >
+				<reward id="62022" count="1" name="Medium Drop Boost"/>
+		</level>
+		<level id="5" name="Can't play without the Tiara" icon="icon.skill0396" need="5" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<!--<achievement id="26" cat="2" type="duelsWon" desc="Win %need% duels.">
+		<level id="1" name="Sir" icon="icon.skill3238" need="50" fame="1000" />
+		<level id="2" name="Sir" icon="icon.skill3238" need="500" fame="2000" />
+		<level id="3" name="Sir" icon="icon.skill3238" need="1000" fame="5000" />
+	</achievement>-->
+	<!--<achievement id="27" cat="2" type="timesDied" desc="Get killed %need% times."> <level id="1" name="Death Awakens" icon="icon.skill0103" need="100" fame="100"/> <level id="2" name="Death Awakens" icon="icon.skill0103" need="250" fame="250"/> <level id="3" name="Death Awakens" icon="icon.skill0103" need="500" fame="500"/> <level id="4" name="Death Awakens" icon="icon.skill0103" need="1000" fame="1000"/> <level id="5" name="Death Awakens" icon="icon.skill0103" need="2000" fame="2000"/> </achievement> -->
+	<!--<achievement id="28" cat="2" type="playersRessurected" desc="Ressurect %need% dead bodies.">
+		<level id="1" name="Holymancer" icon="icon.skill4450" need="20" fame="1000" />
+		<level id="2" name="Holymancer" icon="icon.skill4450" need="100" fame="3000" />
+		<level id="3" name="Holymancer" icon="icon.skill4450" need="500" fame="5000" />
+		<level id="4" name="Holymancer" icon="icon.skill4450" need="1000" fame="5000" />
+	</achievement>-->
+	<achievement id="29" cat="2" type="fameAcquired" desc="Acquire %need% fame.">
+		<level id="1" name="A Nobody" icon="icon.skill5762" need="1000" fame="0" >
+				<reward id="98020" count="100" name="Fame"/>
+		</level>
+		<level id="2" name="Some Guy" icon="icon.skill5762" need="2000" fame="0" >
+				<reward id="98020" count="200" name="Fame"/>
+		</level>
+		<level id="3" name="Cool Guy" icon="icon.skill5762" need="5000" fame="0" >
+				<reward id="98020" count="500" name="Fame"/>
+		</level>
+		<level id="4" name="The Man" icon="icon.skill5762" need="8000" fame="0" >
+				<reward id="98020" count="800" name="Fame"/>
+		</level>
+		<level id="5" name="Big Shot" icon="icon.skill5762" need="10000" fame="0" >
+				<reward id="98020" count="1000" name="Fame"/>
+		</level>
+	</achievement>
+	<!-- Event achievements -->
+	<achievement id="30" cat="3" type="tvtPlayed" desc="Play %need% TvT Events.">
+		<level id="1" name="TvT?" icon="icon.skill1584" need="5" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="TvT Newbie" icon="icon.skill1584" need="10" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="TvT Regular" icon="icon.skill1584" need="15" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="TvT Master" icon="icon.skill1584" need="20" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="TvT Guru" icon="icon.skill1584" need="40" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="31" cat="3" type="ctfPlayed" desc="Play %need% Ctf Events.">
+		<level id="1" name="Ctf?" icon="icon.etc_alliance_flag_i00" need="5" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Ctf Newbie" icon="icon.etc_alliance_flag_i00" need="10" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Ctf Regular" icon="icon.etc_alliance_flag_i00" need="15" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Ctf Master" icon="icon.etc_alliance_flag_i00" need="20" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Ctf Guru" icon="icon.etc_alliance_flag_i00" need="40" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="32" cat="3" type="dmPlayed" desc="Play %need% Deathmatch Events.">
+		<level id="1" name="DeathMatch?" icon="icon.skill0444" need="3" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="DeathMatch Newbie" icon="icon.skill0444" need="5" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="DeathMatch Regular" icon="icon.skill0444" need="10" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="DeathMatch Master" icon="icon.skill0444" need="15" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="DeathMatch Guru" icon="icon.skill0444" need="20" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="33" cat="3" type="siegeEvPlayed" desc="Play %need% Siege Events.">
+		<level id="1" name="Siege Event?" icon="icon.weapon_fort_flag_i00" need="3" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Siege Event Newbie" icon="icon.weapon_fort_flag_i00" need="5" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Siege Event Regular" icon="icon.weapon_fort_flag_i00" need="10" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Siege Event Master" icon="icon.weapon_fort_flag_i00" need="15" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Siege Event Guru" icon="icon.weapon_fort_flag_i00" need="20" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="34" cat="3" type="domiPlayed" desc="Play %need% Domination Events.">
+		<level id="1" name="Domination?" icon="icon.skill30028" need="3" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Domination Newbie" icon="icon.skill30028" need="5" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Domination Regular" icon="icon.skill30028" need="10" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Domination Master" icon="icon.skill30028" need="15" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Domination Guru" icon="icon.skill30028" need="20" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<!-- Enchant achievements -->
+	<achievement id="41" cat="4" type="titWeaponEnch" desc="Enchant a Titanium Weapon to + %need% .">
+		<level id="1" name="Newbie Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="10" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Apprentice Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="11" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Experienced Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="12" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Skilled Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="13" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Guru Titanium Enchanter" icon="tysandyweaponsbyChandy.tysandy_slayer_i" need="14" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="42" cat="4" type="uniqueWeaponEnch" desc="Enchant a Unique Weapon Weapon to + %need% .">
+		<level id="1" name="Newbie Unique Weapon Enchanter" icon="icon.weapon_monster_i00" need="11" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Apprentice Unique Weapon Enchanter" icon="icon.weapon_monster_i00" need="12" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Experienced Unique Weapon Enchanter" icon="icon.weapon_monster_i00" need="13" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Skilled Unique Weapon Enchanter" icon="icon.weapon_monster_i00" need="14" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Guru Unique Weapon Enchanter" icon="icon.weapon_monster_i00" need="15" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="43" cat="4" type="dreadWeaponEnch" desc="Enchant a Dread Weapon Weapon to + %need% .">
+		<level id="1" name="Newbie Dread Weapon Enchanter" icon="blackvesperwp.weapon_vesper_cutter_i00" need="7" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Apprentice Dread Weapon Enchanter" icon="blackvesperwp.weapon_vesper_cutter_i00" need="8" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Experienced Dread Weapon Enchanter" icon="blackvesperwp.weapon_vesper_cutter_i00" need="9" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Skilled Dread Weapon Enchanter" icon="blackvesperwp.weapon_vesper_cutter_i00" need="10" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="Guru Dread Weapon Enchanter" icon="blackvesperwp.weapon_vesper_cutter_i00" need="11" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	
+	
+		<!-- Instance achievements -->
+	<achievement id="45" cat="5" type="soloDone" desc="Enter Solo Instance  %need% times .">
+		<level id="1" name="Newbie Solo Instance Adventurer" icon="ensoul_big_old.ensoul_big_old" need="5" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Apprentice Solo Instance Adventurer" icon="ensoul_big_old.ensoul_big_old" need="10" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Experienced Solo Instance Adventurer" icon="ensoul_big_old.ensoul_big_old" need="20" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Skilled Solo Instance Adventurer" icon="ensoul_big_old.ensoul_big_old" need="30" fame="0" >
+			<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Guru Solo Instance Adventurer" icon="ensoul_big_old.ensoul_big_old" need="50" fame="0" >
+		    <reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="46" cat="5" type="kamaDone" desc="Enter Kamaloka Instance  %need% times .">
+		<level id="1" name="Newbie Kamaloka Adventurer" icon="ensoul_big_old.ensoul_big_old" need="5" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Apprentice Kamaloka Adventurer" icon="ensoul_big_old.ensoul_big_old" need="10" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Experienced Kamaloka Adventurer" icon="ensoul_big_old.ensoul_big_old" need="20" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Skilled Kamaloka Adventurer" icon="ensoul_big_old.ensoul_big_old" need="30" fame="0" >
+			<reward id="62022" count="1" name="Normal Drop Boost "/>
+		</level>
+		<level id="5" name="Guru Kamaloka Adventurer" icon="ensoul_big_old.ensoul_big_old" need="50" fame="0" >
+			<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="47" cat="5" type="embryoDone" desc="Enter Embryo Instance  %need% times .">
+		<level id="1" name="Newbie Embryo Adventurer" icon="ensoul_big_mm.ensoul_big_mm" need="2" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Apprentice Embryo Adventurer" icon="ensoul_big_mm.ensoul_big_mm" need="3" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Experienced Embryo Adventurer" icon="ensoul_big_mm.ensoul_big_mm" need="8" fame="0" >
+			<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Skilled Embryo Adventurer" icon="ensoul_big_mm.ensoul_big_mm" need="12" fame="0" >
+			<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Guru Embryo Adventurer" icon="ensoul_big_mm.ensoul_big_mm" need="15" fame="0" >
+			<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="48" cat="5" type="adenDone" desc="Enter Ultraverse Instance  %need% times .">
+		<level id="1" name="Newbie Ultraverse Adventurer" icon="ShardIcon.Aden" need="1" fame="0" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Apprentice Ultraverse Adventurer" icon="ShardIcon.Aden" need="2" fame="0" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Experienced Ultraverse Adventurer" icon="ShardIcon.Aden" need="4" fame="0" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Skilled Ultraverse Adventurer" icon="ShardIcon.Aden" need="6" fame="0" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="Guru Ultraverse Adventurer" icon="ShardIcon.Aden" need="8" fame="0" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+
+	<!-- Others achievements -->
+	<!--<achievement id="50" cat="6" type="distanceWalked" desc="Walk %need% distance.">
+		<level id="1" name="Wise Walker" icon="icon.skill1368" need="1000000" fame="0" />
+		<level id="2" name="Wise Walker" icon="icon.skill1368" need="10000000" fame="0" />
+	</achievement>-->
+	<achievement id="51" cat="6" type="maxPlayerLevelReach" desc="Reach %need% Level.">
+		<level id="1" name="E-Z 90!" icon="icon.etc_exp_point_i00" need="90" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="E-Z 91!" icon="icon.etc_exp_point_i00" need="91" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="E-Z 92!" icon="icon.etc_exp_point_i00" need="92" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="E-Z 93!" icon="icon.etc_exp_point_i00" need="93" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="E-Z 94!" icon="icon.etc_exp_point_i00" need="94" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+	<achievement id="52" cat="6" type="rebirth" desc="Rebirth %need% time(s).">
+		<level id="1" name="Pheonix" icon="icon.skill0438" need="1" fame="10" >
+				<reward id="800003" count="1" name="Small Fortune Chest"/>
+		</level>
+		<level id="2" name="Here we go again." icon="icon.skill0438" need="2" fame="20" >
+				<reward id="800004" count="1" name="Medium Fortune Chest"/>
+		</level>
+		<level id="3" name="Just let me die!" icon="icon.skill0438" need="3" fame="30" >
+				<reward id="800004" count="1" name="Medium Fortune Chest"/>
+		</level>
+	</achievement>
+	<achievement id="53" cat="6" type="gemedItems" desc="Gem Hax (962) %need% items.">
+		<level id="1" name="WTF are these gems?" icon="DressIcon.FortuneGem" need="1" fame="10" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="2" name="Can't sell shit." icon="DressIcon.FortuneGem" need="3" fame="20" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="3" name="Gambler" icon="DressIcon.FortuneGem" need="5" fame="30" >
+				<reward id="62021" count="1" name="Leeser Drop Boost"/>
+		</level>
+		<level id="4" name="Gem Hax Machine" icon="DressIcon.FortuneGem" need="10" fame="40" >
+				<reward id="62022" count="1" name="Normal Drop Boost"/>
+		</level>
+		<level id="5" name="All i do is Gem Hax" icon="DressIcon.FortuneGem" need="20" fame="50" >
+				<reward id="62023" count="1" name="Greater Drop Boost"/>
+		</level>
+	</achievement>
+	<achievement id="54" cat="6" type="bonanzoOpened" desc="Open %need% fortune chest.">
+		<level id="1" name="WTF are these chests?" icon="DressIcon.FortuneChest" need="1" fame="10" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="2" name="Chests are fun." icon="DressIcon.FortuneChest" need="3" fame="20" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="3" name="Gambler" icon="DressIcon.FortuneChest" need="5" fame="30" >
+				<reward id="62002" count="1" name="Leeser Exp Boost"/>
+		</level>
+		<level id="4" name="Fortune Seeker" icon="DressIcon.FortuneChest" need="10" fame="40" >
+				<reward id="62003" count="1" name="Normal Exp Boost"/>
+		</level>
+		<level id="5" name="I'm All in" icon="DressIcon.FortuneChest" need="20" fame="50" >
+				<reward id="62004" count="1" name="Greater Exp Boost"/>
+		</level>
+	</achievement>
+
+</list>
