@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 import javolution.util.FastList;
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
+import net.sf.l2j.gameserver.Announcements;
 import net.sf.l2j.gameserver.ThreadPoolManager;
 import net.sf.l2j.gameserver.datatables.ArmorSetsTable;
 import net.sf.l2j.gameserver.datatables.CharNameTable;
@@ -22,6 +23,7 @@ import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SpawnTable;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
+import net.sf.l2j.gameserver.instancemanager.InstanceManager;
 import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
 import net.sf.l2j.gameserver.instancemanager.TransformationManager;
 import net.sf.l2j.gameserver.model.Elementals;
@@ -46,12 +48,15 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.clientpackets.CharacterCreate;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.ExBrExtraUserInfo;
+import net.sf.l2j.gameserver.network.serverpackets.ExShowScreenMessage;
 import net.sf.l2j.gameserver.network.serverpackets.ExShowVariationCancelWindow;
 import net.sf.l2j.gameserver.network.serverpackets.ExShowVariationMakeWindow;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
+import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.network.serverpackets.ShortCutRegister;
+import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.network.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.templates.chars.L2NpcTemplate;
@@ -69,15 +74,28 @@ public class DonatePotion implements IItemHandler
 	public final static int	NAME_CHANGE_ITEMID				= 99998;
 	public final static int	CLASS_CHANGE_ITEMID				= 99997;
 	public final static int	SKILL_15_ITEMID					= 99987;
+	public final static int SKILL_20_ITEMID					= 99988;
+	public final static int SKILL_30_ITEMID					= 69990;
 	public final static int	RACE_CHANGE_ITEMID				= 99996;
+	public static final int NOBLE_PACK_ITEMID				= 99800;
+	public static final int CLAN_SKILL_AQUISITION_ITEMID	= 96001;
+	public static final int Random_APC						= 96002;
+	public final static int ITEM_UNBINDER					= 96004;
+
 	public final static int	WEAPON_EXCHANGE_UNIQUE			= 99976;
 	public final static int	WEAPON_EXCHANGE_DREAD			= 99990;
 	public final static int	WEAPON_EXCHANGE_TITANIUM		= 99977;
 	public final static int	WEAPON_EXCHANGE_VESPER			= 99978;
 	public final static int	WEAPON_EXCHANGE_EPIC			= 99979;
+
 	public final static int	ARMOR_SET_EXCHANGER_DREAD		= 99975;
 	public final static int	ARMOR_SET_EXCHANGER_TITANIUM	= 99989;
 	public final static int	ARMOR_SET_EXCHANGER_RYKROS		= 99974;
+	
+	public final static int KAMALOKA						= 2000;
+	public final static int DVC								= 2001;
+	public final static int ULTRAVERSE						= 2002;
+	public final static int FORGE							= 2003;
 	
 	final public static boolean allowUse(L2PcInstance player)
 	{
@@ -139,6 +157,10 @@ public class DonatePotion implements IItemHandler
 		if (id != 1 && id != 20 && id != 21 && !allowUse(activeChar))
 			return;
 		boolean destroyItem = false;
+		String filename;
+		StringBuilder skillHTML;
+		int enchantLevel;
+		NpcHtmlMessage itemReply;
 		switch (id)
 		{
 			case 1: // clear karma
@@ -296,11 +318,11 @@ public class DonatePotion implements IItemHandler
 			}
 			case 7: // change name
 			{
-				String filename = "data/html/custom/Donate/namechange.htm";
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
-				itemReply.replace("%dtn%", "");
-				activeChar.sendPacket(itemReply);
+				String filename1 = "data/html/custom/Donate/namechange.htm";
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
+				itemReply1.replace("%dtn%", "");
+				activeChar.sendPacket(itemReply1);
 				break;
 			}
 			case 8: // main class <> subclass swap
@@ -320,11 +342,11 @@ public class DonatePotion implements IItemHandler
 						StringUtil.append(classHTML, "<a action=\"bypass -h pot_sub_swap ", String.valueOf(subClass.getClassIndex()), "\">", CharTemplateTable.getInstance().getClassNameById(subClassId), "</a><br>");
 					}
 				}
-				String filename = "data/html/custom/Donate/classchange.htm";
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
-				itemReply.replace("%dtn%", classHTML.toString());
-				activeChar.sendPacket(itemReply);
+				String filename1 = "data/html/custom/Donate/classchange.htm";
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
+				itemReply1.replace("%dtn%", classHTML.toString());
+				activeChar.sendPacket(itemReply1);
 				break;
 			}
 			case 9: // alter sex
@@ -344,30 +366,30 @@ public class DonatePotion implements IItemHandler
 			}
 			case 10: // change race
 			{
-				String filename = "data/html/custom/Donate/racechange.htm";
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
+				String filename1 = "data/html/custom/Donate/racechange.htm";
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
 				final int currRace = activeChar.getRace().ordinal();
-				final StringBuilder skillHTML = StringUtil.startAppend(1000, "");
-				skillHTML.append("<center><table>");
+				final StringBuilder skillHTML1 = StringUtil.startAppend(1000, "");
+				skillHTML1.append("<center><table>");
 				for (int i = 0; i < 8; i++)
 				{
 					if (currRace == i)
-						StringUtil.append(skillHTML, "<tr><td width=200>", getRaceName(i) + " (current race)", "</td></tr>");
+						StringUtil.append(skillHTML1, "<tr><td width=200>", getRaceName(i) + " (current race)", "</td></tr>");
 					else
-						StringUtil.append(skillHTML, "<tr><td width=200><a action=\"bypass -h pot_race_change ", String.valueOf(i), "\"><font color=LEVEL>", getRaceName(i), "</font></a></td></tr>");
-					skillHTML.append("<br><tr><td><br></td></tr>");
+						StringUtil.append(skillHTML1, "<tr><td width=200><a action=\"bypass -h pot_race_change ", String.valueOf(i), "\"><font color=LEVEL>", getRaceName(i), "</font></a></td></tr>");
+					skillHTML1.append("<br><tr><td><br></td></tr>");
 				}
-				skillHTML.append("</table></center>");
-				itemReply.replace("%dtn%", skillHTML.toString());
-				activeChar.sendPacket(itemReply);
+				skillHTML1.append("</table></center>");
+				itemReply1.replace("%dtn%", skillHTML1.toString());
+				activeChar.sendPacket(itemReply1);
 				break;
 			}
 			case 11: // +15 skill
 			{
-				String filename = "data/html/custom/Donate/skill15.htm";
-				final StringBuilder skillHTML = StringUtil.startAppend(1000, "");
-				skillHTML.append("<center><table>");
+				String filename1 = "data/html/custom/Donate/skill15.htm";
+				final StringBuilder skillHTML1 = StringUtil.startAppend(1000, "");
+				skillHTML1.append("<center><table>");
 				int counter = 0;
 				for (L2Skill skill : activeChar.getAllSkills())
 				{
@@ -376,25 +398,186 @@ public class DonatePotion implements IItemHandler
 						final int displayedLevel = skill.getLevel() % 100;
 						if (skill.getLevel() >= 101 && displayedLevel < 15)
 						{
-							StringUtil.append(skillHTML, "<tr><td width=200><a action=\"bypass -h pot_skill_15 ", String.valueOf(skill.getId()), "\">", "+" + displayedLevel + " " + skill.getName(), "</a></td></tr>");
+							StringUtil.append(skillHTML1, "<tr><td width=200><a action=\"bypass -h pot_skill_15 ", String.valueOf(skill.getId()), "\">", "+" + displayedLevel + " " + skill.getName(), "</a></td></tr>");
 							counter++;
 						}
 					}
 				}
-				skillHTML.append("</table></center>");
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
+				skillHTML1.append("</table></center>");
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
 				if (counter <= 0)
 				{
-					itemReply.replace("%dtn%", "You don't have any skills that can be enchanted +15." + " Remember that you must have a skill enchanted to at least +1 if you want it to appear in the list. Buy some Giant's Codex.");
+					itemReply1.replace("%dtn%", "You don't have any skills that can be enchanted +15." + " Remember that you must have a skill enchanted to at least +1 if you want it to appear in the list. Buy some Giant's Codex.");
 				}
 				else
 				{
-					itemReply.replace("%dtn%", skillHTML.toString());
+					itemReply1.replace("%dtn%", skillHTML1.toString());
 				}
-				activeChar.sendPacket(itemReply);
+				activeChar.sendPacket(itemReply1);
+				break;				
+			}
+			case 45: // +20 skill
+			{
+				String filename1 = "data/html/custom/Donate/skill20.htm";
+				final StringBuilder skillHTML1 = StringUtil.startAppend(1000, "");
+				skillHTML1.append("<center><table>");
+				int counter = 0;
+				for (L2Skill skill : activeChar.getAllSkills())
+				{
+					if (skill != null)
+					{
+						final int displayedLevel = skill.getLevel() % 100;
+						if (skill.getLevel() >= 101 && displayedLevel < 20)
+						{
+							StringUtil.append(skillHTML1, "<tr><td width=200><a action=\"bypass -h pot_skill_20 ", String.valueOf(skill.getId()), "\">", "+" + displayedLevel + " " + skill.getName(), "</a></td></tr>");
+							counter++;
+						}
+					}
+				}
+				skillHTML1.append("</table></center>");
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
+				if (counter <= 0)
+				{
+					itemReply1.replace("%dtn%", "You don't have any skills that can be enchanted +20." + " Remember that you must have a skill enchanted to at least +1 if you want it to appear in the list. Buy some Giant's Codex.");
+				}
+				else
+				{
+					itemReply1.replace("%dtn%", skillHTML1.toString());
+				}
+				activeChar.sendPacket(itemReply1);
+				break;				
+			}
+			case 46: // +30 skill
+			{
+				String filename1 = "data/html/custom/Donate/skill30.htm";
+				final StringBuilder skillHTML1 = StringUtil.startAppend(1000, "");
+				skillHTML1.append("<center><table>");
+				int counter = 0;
+				for (L2Skill skill : activeChar.getAllSkills())
+				{
+					if (skill != null)
+					{
+						final int displayedLevel = skill.getLevel() % 100;
+						if (skill.getLevel() >= 101 && displayedLevel < 30)
+						{
+							StringUtil.append(skillHTML1, "<tr><td width=200><a action=\"bypass -h pot_skill_30 ", String.valueOf(skill.getId()), "\">", "+" + displayedLevel + " " + skill.getName(), "</a></td></tr>");
+							counter++;
+						}
+					}
+				}
+				skillHTML1.append("</table></center>");
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
+				if (counter <= 0)
+				{
+					itemReply1.replace("%dtn%", "You don't have any skills that can be enchanted +30." + " Remember that you must have a skill enchanted to at least +1 if you want it to appear in the list. Buy some Giant's Codex.");
+				}
+				else
+				{
+					itemReply1.replace("%dtn%", skillHTML1.toString());
+				}
+				activeChar.sendPacket(itemReply1);
+				break;				
+			}			
+			case 47: //Clan Skill Aquisition
+				
+			     if (activeChar.isClanLeader()) 
+			     {
+			       for(int pvps = 370; pvps <= 391; ++pvps) 
+			       {
+			       activeChar.getClan().addNewSkill(SkillTable.getInstance().getInfo(pvps, SkillTable.getInstance().getMaxLevel(pvps)));
+			        }
+
+			      activeChar.sendPacket((L2GameServerPacket)(new ExShowScreenMessage("Now your clan is Full Skill!", 10000)));
+			      activeChar.destroyItem("", item.getObjectId(), 1L, (L2Object)null, true);
+			    } 
+			     else 
+			    {
+			      activeChar.sendMessage("Only leaders of the clans can use this item!");
+			    }
+			break;
+			case 48: // Instance Reset Scroll Ultraverse (Beta)
+			{
+				if (System.currentTimeMillis() < InstanceManager.getInstance().getInstanceTime(activeChar.getAccountName(), ULTRAVERSE)) 
+				{
+					InstanceManager.getInstance().deleteInstanceTime(activeChar.getAccountName(), ULTRAVERSE);
+					activeChar.sendMessage("Congratulations! Ultraverse can be entered an additional time today!");
+					destroyItem = true;
+				}
+				else
+				{
+					activeChar.sendMessage("You must enter Ultraverse at least once this week.");
+					return;
+				}
 				break;
 			}
+				case 49: // Instance Reset Scroll KAMALOKA (Beta)
+			{
+				if (System.currentTimeMillis() < InstanceManager.getInstance().getInstanceTime(activeChar.getAccountName(), KAMALOKA)) 
+				{
+					InstanceManager.getInstance().deleteInstanceTime(activeChar.getAccountName(), KAMALOKA);
+					activeChar.sendMessage("Congratulations! KAMALOKA can be entered an additional time today!");
+					destroyItem = true;
+				}
+				else
+				{
+					activeChar.sendMessage("You must enter KAMALOKA at least once this week.");
+					return;
+				}
+				break;
+			}
+				case 50: // Instance Reset Scroll DVC (Beta)
+			{
+				if (System.currentTimeMillis() < InstanceManager.getInstance().getInstanceTime(activeChar.getAccountName(), DVC)) 
+				{
+					InstanceManager.getInstance().deleteInstanceTime(activeChar.getAccountName(), DVC);
+					activeChar.sendMessage("Congratulations! DVC can be entered an additional time today!");
+					destroyItem = true;
+				}
+				else
+				{
+					activeChar.sendMessage("You must enter DVC at least once this week.");
+					return;
+				}
+				break;
+			}
+			case 51: // Instance Reset Scroll FORGE (Beta)
+			{
+				if (System.currentTimeMillis() < InstanceManager.getInstance().getInstanceTime(activeChar.getAccountName(), FORGE)) 
+				{
+					InstanceManager.getInstance().deleteInstanceTime(activeChar.getAccountName(), FORGE);
+					activeChar.sendMessage("Congratulations! FORGE can be entered an additional time today!");
+					destroyItem = true;
+				}
+				else
+				{
+					activeChar.sendMessage("You must enter FORGE at least once this week.");
+					return;
+				}
+				break;
+			}	
+            case 52:  //UnBinder
+                filename = "data/html/custom/Donate/unbinder.htm";
+                skillHTML = StringUtil.startAppend(1000, "");
+                skillHTML.append("<center><table>");
+                L2ItemInstance[] arr$ = activeChar.getInventory().getItems();
+                enchantLevel = arr$.length;
+
+                for(int limit = 0; limit < enchantLevel; ++limit) {
+                   L2ItemInstance itemToUnbind = arr$[limit];
+                   if (itemToUnbind.getUntradeableTime() != 0L && !itemToUnbind.isTimeLimitedItem() && itemToUnbind.isEnchantable()) {
+                      StringUtil.append(skillHTML, "<tr><td width=200><a action=\"bypass -h pot_unbind_it ", String.valueOf(itemToUnbind.getItemId()), "\">", itemToUnbind.getName(), " +", String.valueOf(itemToUnbind.getEnchantLevel()), "</a></td></tr><tr></tr><br><tr></tr><br>");
+                   }
+                }
+
+                skillHTML.append("</table></center>");
+                itemReply = new NpcHtmlMessage(1);
+                itemReply.setFile(filename);
+                itemReply.replace("%dtn%", skillHTML.toString());
+                activeChar.sendPacket((L2GameServerPacket)itemReply);
+                break;			
 			case 13: // weapon exchanger
 			{
 				final L2ItemInstance oldWep = activeChar.getActiveWeaponInstance();
@@ -416,9 +599,9 @@ public class DonatePotion implements IItemHandler
 					activeChar.sendMessage("Your equipped weapon cannot be exchanged at the moment");
 					return;
 				}
-				final int enchantLevel = oldWep.getEnchantLevel();
-				final String originalWeaponName = "+" + enchantLevel + " " + oldWep.getName();
-				String filename = "data/html/custom/Donate/weaponchange.htm";
+				final int enchantLevel1 = oldWep.getEnchantLevel();
+				final String originalWeaponName = "+" + enchantLevel1 + " " + oldWep.getName();
+				String filename1 = "data/html/custom/Donate/weaponchange.htm";
 				final StringBuilder weaponHTML = StringUtil.startAppend(1000, "");
 				weaponHTML.append("<center><table>");
 				int counter = 0;
@@ -429,25 +612,25 @@ public class DonatePotion implements IItemHandler
 						final L2ItemInstance newDummyItem = ItemTable.getInstance().createDummyItem(itemId);
 						if (newDummyItem != null)
 						{
-							String itemName = "+" + enchantLevel + " " + newDummyItem.getName();
+							String itemName = "+" + enchantLevel1 + " " + newDummyItem.getName();
 							StringUtil.append(weaponHTML, "<tr><td width=200><a action=\"bypass -h pot_weapon_exchange ", String.valueOf(itemId), " ", String.valueOf(item.getObjectId()), "\">", itemName, "</a></td></tr>");
 							counter++;
 						}
 					}
 				}
 				weaponHTML.append("</table></center>");
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
 				if (counter <= 0)
 				{
-					itemReply.replace("%dtn%", "There are no exchangeable weapons for your weapon");
+					itemReply1.replace("%dtn%", "There are no exchangeable weapons for your weapon");
 				}
 				else
 				{
-					itemReply.replace("%gcp%", originalWeaponName.toString());
-					itemReply.replace("%dtn%", weaponHTML.toString());
+					itemReply1.replace("%gcp%", originalWeaponName.toString());
+					itemReply1.replace("%dtn%", weaponHTML.toString());
 				}
-				activeChar.sendPacket(itemReply);
+				activeChar.sendPacket(itemReply1);
 				break;
 			}
 			case 14: // armor exchanger
@@ -494,7 +677,7 @@ public class DonatePotion implements IItemHandler
 					activeChar.sendMessage("Your armor set cannot be exchanged with this item");
 					return;
 				}
-				String filename = "data/html/custom/Donate/armorchange.htm";
+				String filename1 = "data/html/custom/Donate/armorchange.htm";
 				final StringBuilder armorHTML = StringUtil.startAppend(1000, "");
 				armorHTML.append("<center><table>");
 				int limit = dreadTit < 4 ? 4 : 7;
@@ -535,11 +718,11 @@ public class DonatePotion implements IItemHandler
 					}
 				}
 				armorHTML.append("</table></center>");
-				NpcHtmlMessage itemReply = new NpcHtmlMessage(1);
-				itemReply.setFile(filename);
-				itemReply.replace("%gcp%", originalArmorName.toString());
-				itemReply.replace("%dtn%", armorHTML.toString());
-				activeChar.sendPacket(itemReply);
+				NpcHtmlMessage itemReply1 = new NpcHtmlMessage(1);
+				itemReply1.setFile(filename1);
+				itemReply1.replace("%gcp%", originalArmorName.toString());
+				itemReply1.replace("%dtn%", armorHTML.toString());
+				activeChar.sendPacket(itemReply1);
 				break;
 			}
 			case 20: // free tradechat
@@ -594,17 +777,20 @@ public class DonatePotion implements IItemHandler
 				activeChar.broadcastUserInfo();
 				destroyItem = true;
 				break;
-			case 23:
-				if (activeChar.isNoble())
+			case 23:  //Nobless Pack
+		        if (activeChar.isNoble()) 
 				{
-					activeChar.sendMessage("You already are a Noblesse!");
-					return;
-				}
-				activeChar.setNoble(true);
-				activeChar.sendMessage("You are now Noblesse!");
-				activeChar.broadcastUserInfo();
-				destroyItem = true;
-				break;
+		        activeChar.sendMessage("You Are Already A Noble!.");
+		        } 
+				else 
+				{
+		        activeChar.broadcastPacket(new SocialAction(activeChar.getObjectId(), 16));
+		        activeChar.broadcastUserInfo();
+		        activeChar.setNoble(true);
+		        activeChar.sendMessage("Congratulations you are now Noblesse");
+		        destroyItem = true;
+		        }
+		        break;
 			case 24:
 				if (activeChar.isDead())
 				{
@@ -870,8 +1056,8 @@ public class DonatePotion implements IItemHandler
 				}
 				destroyItem = true;
 				break;
-			case 31:
-				alekos1 = random.nextInt(3);
+			case 31: // APC Spawner
+				alekos1 = random.nextInt(10);
 				switch (alekos1)
 				{
 					case 0:
@@ -882,6 +1068,28 @@ public class DonatePotion implements IItemHandler
 						break;
 					case 2:
 						spawnMonster(activeChar, "110047", 0, 1, false, 0, 0);
+						
+					case 3:
+						spawnMonster(activeChar, "1000095", 0, 1, false, 0, 0);
+						break;
+					case 4:
+						spawnMonster(activeChar, "95700", 0, 1, false, 0, 0);
+						break;
+					case 5:
+						spawnMonster(activeChar, "95701", 0, 1, false, 0, 0);
+					case 6:
+						spawnMonster(activeChar, "95702", 0, 1, false, 0, 0);
+						break;
+					case 7:
+						spawnMonster(activeChar, "95703", 0, 1, false, 0, 0);
+						break;
+					case 8:
+						spawnMonster(activeChar, "95704", 0, 1, false, 0, 0);
+					case 9:
+						spawnMonster(activeChar, "95698", 0, 1, false, 0, 0);
+						break;
+					case 10:
+						spawnMonster(activeChar, "95697", 0, 1, false, 0, 0);
 						break;
 				}
 				destroyItem = true;
@@ -1778,6 +1986,60 @@ public class DonatePotion implements IItemHandler
 				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
 			}
 		}
+		else if (action.startsWith("unbind_it"))
+		{
+	        int itemId = 0;
+			
+			try
+			{
+				itemId = Integer.parseInt(action.substring(10));
+			}
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+			}
+		
+			if (itemId <= 0)
+			{
+				_log.warning(player.getName() + " sent an item unbind request with itemId of 0!!!!!!!!!!!!");
+				player.logout();
+				return;
+			}
+		
+		    final L2ItemInstance itemToUnbind = player.getInventory().getItemByItemId(itemId);
+		    
+		    if (itemToUnbind == null)
+		    {
+		    	player.sendMessage("You don't have this item anymore");
+		        return;
+		    }
+		    
+		    if (itemToUnbind.getUntradeableTime() == 0)
+		    {
+		    	player.sendMessage("This item is already tradeable.");
+		        return;
+		    }
+		    
+		    if (itemToUnbind.isEquipped())
+		    {
+		    	player.sendMessage("Please unequip this item in order to unbind it");
+		        return;
+		    }
+		    
+		    if (player.destroyItemByItemId("Unbind Item", ITEM_UNBINDER, 1, player, true))
+			{
+		    	itemToUnbind.setUntradeableTimer(0);
+		    	player.playSound("ItemSound.quest_finish");	
+		    	player.sendMessage("Success! Your " +itemToUnbind.getName()+ " is now tradeable!");					
+			}
+			else
+			{
+				_log.severe(player.getName()+ " REQUESTED AN ITEM UNBIND W/O ACTUALLY ACTIVATING THE ITEM FIRST!!!!!!!");
+				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("REQUESTED AN ITEM UNBIND W/O ACTUALLY ACTIVATING THE ITEM FIRST!!!!!!!");
+			}
+		    
+		}		
 		else if (action.startsWith("sub_swap "))
 		{
 			int subclassIndex = 0;
@@ -2040,21 +2302,34 @@ public class DonatePotion implements IItemHandler
 			{
 				e.printStackTrace();
 			}
+			
 			if (skillId <= 0)
 			{
 				_log.warning(player.getName() + " sent incorrect pot_skill_15 function ");
 				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent incorrect pot_skill_15 function");
 				return;
 			}
+			
+			if (skillId == 1406 || skillId == 1407 || skillId == 1408)
+			{
+				player.sendMessage("You may not use the skill booster on top tier Summons.");			
+				return;
+			}
+			
 			final int skillLvl = player.getSkillLevel(skillId);
+			
 			if (skillLvl <= 100)
 			{
 				_log.warning(player.getName() + " sent enchanting on a skill that is unenchanted or don't have");
 				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
 				return;
 			}
+			
 			final int newSkillLvl = skillLvl + (15 - (skillLvl % 100));
 			final L2Skill skill = SkillTable.getInstance().getInfo(skillId, newSkillLvl);
+			
 			if (skill != null)
 			{
 				if (player.destroyItemByItemId("+15 skill", SKILL_15_ITEMID, 1, player, true))
@@ -2067,6 +2342,7 @@ public class DonatePotion implements IItemHandler
 					player.sendPacket(new ExBrExtraUserInfo(player));
 					// update all the shortcuts to this skill
 					L2ShortCut[] allShortCuts = player.getAllShortCuts();
+					
 					for (L2ShortCut sc : allShortCuts)
 					{
 						if (sc.getId() == skillId && sc.getType() == L2ShortCut.TYPE_SKILL)
@@ -2081,11 +2357,162 @@ public class DonatePotion implements IItemHandler
 				{
 					_log.severe(player.getName() + " REQUESTED A +15 skill without having an item!!!!!!!");
 					player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+					Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
 				}
 			}
 			else
 			{
-				_log.severe(player.getName() + " REQUESTED A NULL SKILL with skillId of !!!!!!! " + skillId);
+				_log.severe(player.getName() + " REQUESTED A NULL SKILL with skillId of !!!!!!! "+skillId);
+			}
+		}
+		else if (action.startsWith("skill_20 "))
+		{
+			int skillId = 0;
+			
+			try
+			{
+				skillId = Integer.parseInt(action.substring(9));
+			}
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+			}
+			
+			if (skillId <= 0)
+			{
+				_log.warning(player.getName() + " sent incorrect pot_skill_20 function ");
+				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
+				return;
+			}
+			
+			if (skillId == 1406 || skillId == 1407 || skillId == 1408)
+			{
+				player.sendMessage("You may not use the skill booster on top tier Summons.");			
+				return;
+			}
+			
+			final int skillLvl = player.getSkillLevel(skillId);
+			
+			if (skillLvl <= 100)
+			{
+				_log.warning(player.getName() + " sent enchanting on a skill that is unenchanted or don't have");
+				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
+				return;
+			}
+			
+			final int newSkillLvl = skillLvl + (20 - (skillLvl % 100));
+			final L2Skill skill = SkillTable.getInstance().getInfo(skillId, newSkillLvl);
+			
+			if (skill != null)
+			{
+				if (player.destroyItemByItemId("+20 skill", SKILL_20_ITEMID, 1, player, true))
+				{
+					player.addSkill(skill, true);
+					player.playSound("ItemSound.quest_finish");
+					player.sendMessage("Congratulations! Your " + skill.getName() + " is now +20");
+					player.sendSkillList();
+					player.sendPacket(new UserInfo(player));
+					player.sendPacket(new ExBrExtraUserInfo(player));
+					// update all the shortcuts to this skill
+					L2ShortCut[] allShortCuts = player.getAllShortCuts();
+					
+					for (L2ShortCut sc : allShortCuts)
+					{
+						if (sc.getId() == skillId && sc.getType() == L2ShortCut.TYPE_SKILL)
+						{
+							L2ShortCut newsc = new L2ShortCut(sc.getSlot(), sc.getPage(), sc.getType(), sc.getId(), player.getSkillLevel(skillId), 1);
+							player.sendPacket(new ShortCutRegister(newsc));
+							player.registerShortCut(newsc);
+						}
+					}
+				}
+				else
+				{
+					_log.severe(player.getName() + " REQUESTED A +20 skill without having an item!!!!!!!");
+					player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+					Announcements.getInstance().announceToAll("REQUESTED A +20 skill without having an item!!!!!!!");
+				}
+			}
+			else
+			{
+				_log.severe(player.getName() + " REQUESTED A NULL SKILL with skillId of !!!!!!! "+skillId);
+			}
+		}
+		else if (action.startsWith("skill_30 "))
+		{
+			int skillId = 0;
+			
+			try
+			{
+				skillId = Integer.parseInt(action.substring(9));
+			}
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+			}
+			
+			if (skillId <= 0)
+			{
+				_log.warning(player.getName() + " sent incorrect pot_skill_30 function ");
+				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent incorrect pot_skill_15 function");
+				return;
+			}
+			
+			if (skillId == 1406 || skillId == 1407 || skillId == 1408)
+			{
+				player.sendMessage("You may not use the skill booster on top tier Summons.");			
+				return;
+			}
+			
+			final int skillLvl = player.getSkillLevel(skillId);
+			
+			if (skillLvl <= 100)
+			{
+				_log.warning(player.getName() + " sent enchanting on a skill that is unenchanted or don't have");
+				player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+				Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
+				return;
+			}
+			
+			final int newSkillLvl = skillLvl + (30 - (skillLvl % 100));
+			final L2Skill skill = SkillTable.getInstance().getInfo(skillId, newSkillLvl);
+			
+			if (skill != null)
+			{
+				if (player.destroyItemByItemId("+30 skill", SKILL_30_ITEMID, 1, player, true))
+				{
+					player.addSkill(skill, true);
+					player.playSound("ItemSound.quest_finish");
+					player.sendMessage("Congratulations! Your " + skill.getName() + " is now +30");
+					player.sendSkillList();
+					player.sendPacket(new UserInfo(player));
+					player.sendPacket(new ExBrExtraUserInfo(player));
+					// update all the shortcuts to this skill
+					L2ShortCut[] allShortCuts = player.getAllShortCuts();
+					
+					for (L2ShortCut sc : allShortCuts)
+					{
+						if (sc.getId() == skillId && sc.getType() == L2ShortCut.TYPE_SKILL)
+						{
+							L2ShortCut newsc = new L2ShortCut(sc.getSlot(), sc.getPage(), sc.getType(), sc.getId(), player.getSkillLevel(skillId), 1);
+							player.sendPacket(new ShortCutRegister(newsc));
+							player.registerShortCut(newsc);
+						}
+					}
+				}
+				else
+				{
+					_log.severe(player.getName() + " REQUESTED A +30 skill without having an item!!!!!!!");
+					player.setPunishLevel(L2PcInstance.PunishLevel.JAIL, 0);
+					Announcements.getInstance().announceToAll("sent enchanting on a skill that is unenchanted or don't have");
+				}
+			}
+			else
+			{
+				_log.severe(player.getName() + " REQUESTED A NULL SKILL with skillId of !!!!!!! "+skillId);
 			}
 		}
 		else if (action.startsWith("weapon_exchange "))
