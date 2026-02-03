@@ -1,0 +1,3 @@
+[submodule "autobots/vendor/L2Autobots"]
+	path = autobots/vendor/L2Autobots
+	url = https://github.com/Elfocrash/L2Autobots.git
